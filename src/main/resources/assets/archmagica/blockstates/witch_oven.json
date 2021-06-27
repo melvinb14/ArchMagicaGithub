@@ -1,0 +1,9 @@
+  
+{
+  "variants": {
+    "facing=north": { "model": "archmagica:block/witch_oven" },
+    "facing=south": { "model": "archmagica:block/witch_oven", "y":  180},
+    "facing=west": { "model": "archmagica:block/witch_oven", "y":  270},
+    "facing=east": { "model": "archmagica:block/witch_oven", "y":  90}
+  }
+}

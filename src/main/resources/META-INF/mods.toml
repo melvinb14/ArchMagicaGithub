@@ -1,0 +1,16 @@
+#Anything that is optional which you are not using, just delete that line. You can also delete any of the '#comments'
+ 
+modLoader="javafml" #mandatory
+loaderVersion="[35,)" #mandatory
+license="All rights reserved" #mandatory 
+
+[[mods]] #mandatory
+modId="archmagica" #mandatory
+version="1.0" #mandatory
+displayName="Arch Magica" #mandatory
+credits="Thanks for TurtyWurty for the tutorial." #optional
+authors="melvinbur." #optional
+description='''
+
+Hello!
+''' #mandatory
