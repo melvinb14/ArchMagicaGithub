@@ -1,7 +1,11 @@
 package com.melvinbur.archmagica.core.init;
 
+
+
 import com.melvinbur.archmagica.ArchMagica;
-import com.melvinbur.archmagica.common.blocks.DisplayCaseBlock;
+
+import com.melvinbur.archmagica.common.blocks.WitchOven;
+
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -9,6 +13,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+
+
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -117,23 +123,16 @@ public class BlockInit {
 	
 	// 3D Blocks
 	
-	public static final RegistryObject<Block> WITCH_OVEN = BLOCKS.register("witch_oven",
-			() -> new Block(AbstractBlock.Properties.create(Material.IRON, MaterialColor.GRAY)
-					.hardnessAndResistance(5f, 6f).harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(2)
-					.sound(SoundType.METAL)));
-	
-	
-					
-	
-	
-	public static final RegistryObject<Block> DISPLAY_CASE = BLOCKS.register("display_case", () -> new DisplayCaseBlock());
-	
-	
-	
-	
-	
-	
 
 	
-
+					                                           
+			
+	
+	
+	public static final RegistryObject<Block> WITCH_OVEN = BLOCKS.register("witch_oven", () -> new WitchOven());
+	
 }
+
+	
+	
+

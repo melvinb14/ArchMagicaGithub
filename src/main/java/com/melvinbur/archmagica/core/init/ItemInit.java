@@ -335,12 +335,11 @@ public class ItemInit {
 	public static final RegistryObject<BlockItem> JADE_ORE = ITEMS.register("jade_ore", 
 			() -> new BlockItem(BlockInit.JADE_ORE.get(), new Item.Properties().group(ArchMagicaItemGroup2.ARCHMAGICA)));
 	
+	
 	public static final RegistryObject<BlockItem> WITCH_OVEN = ITEMS.register("witch_oven", 
 			() -> new BlockItem(BlockInit.WITCH_OVEN.get(), new Item.Properties().group(ArchMagicaItemGroup2.ARCHMAGICA)));
 	
 	
-	public static final RegistryObject<BlockItem> DISPLAY_CASE = ITEMS.register("display_case", 
-			() -> new BlockItem(BlockInit.DISPLAY_CASE.get(), new Item.Properties().group(ArchMagicaItemGroup2.ARCHMAGICA)));
 	
 	
 	

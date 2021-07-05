@@ -1,7 +1,8 @@
 package com.melvinbur.archmagica.core.init;
 
 import com.melvinbur.archmagica.ArchMagica;
-import com.melvinbur.archmagica.common.container.DisplayCaseContainer;
+
+import com.melvinbur.archmagica.common.container.WitchOvenContainer;
 
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraft.inventory.container.ContainerType;
@@ -15,8 +16,10 @@ public class ContainerTypesInit {
 			.create(ForgeRegistries.CONTAINERS, ArchMagica.MOD_ID);
 	
 
-	public static final RegistryObject<ContainerType<DisplayCaseContainer>> DISPLAY_CASE_CONTAINER_TYPE = CONTAINER_TYPES
-			.register("display_case", () -> IForgeContainerType.create(DisplayCaseContainer::new));
+	
+	
+	public static final RegistryObject<ContainerType<WitchOvenContainer>> WITCH_OVEN = CONTAINER_TYPES.register("witch_oven", 
+			() -> IForgeContainerType.create(WitchOvenContainer::new));
 
 
 

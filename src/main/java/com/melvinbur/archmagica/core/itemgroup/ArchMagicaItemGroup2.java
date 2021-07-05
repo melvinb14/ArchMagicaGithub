@@ -1,6 +1,7 @@
 package com.melvinbur.archmagica.core.itemgroup;
 
-import com.melvinbur.archmagica.core.init.ItemInit;
+import com.melvinbur.archmagica.core.init.BlockInit;
+
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ public class ArchMagicaItemGroup2 extends ItemGroup {
 
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemInit.PURGATORY_STONE.get());
+			return new ItemStack(BlockInit.PURGATORY_STONE.get());
 		}
 
 		

@@ -4,8 +4,8 @@ package com.melvinbur.archmagica.core.init;
 
 import com.melvinbur.archmagica.ArchMagica;
 
-import com.melvinbur.archmagica.common.te.DisplayCaseTileEntity;
 
+import com.melvinbur.archmagica.common.te.WitchOvenTileEntity;
 
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -20,8 +20,11 @@ public class TileEntityTypesInit {
 
 	
 	
-	public static final RegistryObject<TileEntityType<DisplayCaseTileEntity>> DISPLAY_CASE_TILE_ENTITY_TYPE = TILE_ENTITY_TYPE
-			.register("display_case",
-					() -> TileEntityType.Builder.create(DisplayCaseTileEntity::new, BlockInit.DISPLAY_CASE.get()).build(null));
+	
+	
+	public static final RegistryObject<TileEntityType<WitchOvenTileEntity>> WITCH_OVEN =
+			TILE_ENTITY_TYPE.register("witch_oven", 
+					() -> TileEntityType.Builder.create(WitchOvenTileEntity::new, 
+							BlockInit.WITCH_OVEN.get()).build(null));
 
 }

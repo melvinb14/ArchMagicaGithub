@@ -16,9 +16,11 @@ import org.apache.logging.log4j.Logger;
 
 import com.melvinbur.archmagica.core.init.BlockInit;
 import com.melvinbur.archmagica.core.init.ItemInit;
+import com.melvinbur.archmagica.core.init.RecipeSerializers;
 import com.melvinbur.archmagica.core.init.TileEntityTypesInit;
 import com.melvinbur.archmagica.core.init.ContainerTypesInit;
-import com.melvinbur.archmagica.world.OreGeneration;
+import com.melvinbur.archmagica.core.init.FeatureInit;
+
 
 
 
@@ -40,10 +42,11 @@ public class ArchMagica {
         BlockInit.BLOCKS.register(bus);
         TileEntityTypesInit.TILE_ENTITY_TYPE.register(bus);
 		ContainerTypesInit.CONTAINER_TYPES.register(bus);
+		RecipeSerializers.RECIPE_SERIALIZERS.register(bus);
         
      
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, OreGeneration::generateOres);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, FeatureInit::addOres);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
