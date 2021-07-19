@@ -3,9 +3,11 @@ package com.melvinbur.archmagica.core.init;
 
 
 import com.melvinbur.archmagica.ArchMagica;
+import com.melvinbur.archmagica.common.blocks.BlacksmithAnvil;
 
+import com.melvinbur.archmagica.common.blocks.MagicCrystal;
+import com.melvinbur.archmagica.common.blocks.MagicCrystal2;
 import com.melvinbur.archmagica.common.blocks.WitchOven;
-
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -13,8 +15,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-
-
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -121,15 +122,68 @@ public class BlockInit {
 					.hardnessAndResistance(5f, 6f).harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(2)
 					.sound(SoundType.STONE)));
 	
-	// 3D Blocks
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	// BlockBench Blocks
 	
 
+	public static final RegistryObject<Block> WITCH_OVEN = BLOCKS.register("witch_oven", 
+			() -> new WitchOven(AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.GRAY).
+					                                           hardnessAndResistance(5F, 6F).
+					                                           setRequiresTool().
+					                                           harvestLevel(2).
+					                                           sound(SoundType.ANVIL).
+					                                           setLightLevel((state) -> {
+					                                        	   return state.get(BlockStateProperties.LIT) ? 13 : 0;}
+					                                           )));
 	
-					                                           
+	
+	
+	
+	
+	public static final RegistryObject<Block> BLACKSMITH_ANVIL = BLOCKS.register("blacksmith_anvil", 
+			() -> new BlacksmithAnvil(AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.GRAY).
+					                                           hardnessAndResistance(5F, 6F).
+					                                           setRequiresTool().
+					                                           sound(SoundType.ANVIL)));
+	
+	public static final RegistryObject<Block> MAGIC_CRYSTAL	= BLOCKS.register("magic_crystal",
+			() -> new MagicCrystal(AbstractBlock.Properties.create(Material.GLASS, MaterialColor.ICE)
+	.hardnessAndResistance(0.3F, 0F)
+	.sound(SoundType.GLASS)
+	.setLightLevel(b -> 11)
+	.harvestTool(ToolType.PICKAXE)
+	.setRequiresTool()
+	.harvestLevel(0)
+	.notSolid()));
+	
+	
+
+
+	
+	
+	
+	public static final RegistryObject<Block> MAGIC_CRYSTAL2 = BLOCKS.register("magic_crystal2",
+			() -> new MagicCrystal2(AbstractBlock.Properties.create(Material.GLASS, MaterialColor.ICE)
+					.hardnessAndResistance(0.3F, 0F)
+					.sound(SoundType.GLASS)
+					.setLightLevel(b -> 11)
+					.harvestTool(ToolType.PICKAXE)
+					.setRequiresTool()
+					.harvestLevel(0)
+					.notSolid()));
+	      
 			
 	
 	
-	public static final RegistryObject<Block> WITCH_OVEN = BLOCKS.register("witch_oven", () -> new WitchOven());
+	
 	
 }
 

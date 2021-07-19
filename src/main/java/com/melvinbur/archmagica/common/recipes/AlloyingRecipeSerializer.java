@@ -44,7 +44,7 @@ public class AlloyingRecipeSerializer<T extends AlloyingRecipe> extends net.mine
 	      }));
 	    }
 		float experience = JSONUtils.getFloat(json, "experience", 0.0F);
-		int smeltTime = JSONUtils.getInt(json, "smelttime", 350);
+		int smeltTime = JSONUtils.getInt(json, "smelttime", 250);
 		
 		return this.factory.create(id, group, primaryInput, secondaryInput, output, experience, smeltTime);
 	}

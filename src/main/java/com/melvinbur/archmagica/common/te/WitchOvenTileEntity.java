@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.melvinbur.archmagica.ArchMagica;
+
 import com.melvinbur.archmagica.common.blocks.WitchOven;
 import com.melvinbur.archmagica.common.container.WitchOvenContainer;
 import com.melvinbur.archmagica.common.recipes.AlloyingRecipe;
@@ -159,6 +159,7 @@ public class WitchOvenTileEntity extends LockableTileEntity implements ITickable
 		registerFuel(Items.LAVA_BUCKET, 16000);
 		registerFuel(Blocks.COAL_BLOCK, 12000);
 		registerFuel(Items.BLAZE_ROD, 2000);
+		registerFuel(Items.COAL, 1333);
 	}
 	
 	private boolean isBurning() 
@@ -489,7 +490,7 @@ public class WitchOvenTileEntity extends LockableTileEntity implements ITickable
 	@Override
 	protected ITextComponent getDefaultName() 
 	{
-		return new TranslationTextComponent("container" + ArchMagica.MOD_ID + "witch_oven");
+		return new TranslationTextComponent("container.archmagica.witch_oven");
 	}
 
 	@Override

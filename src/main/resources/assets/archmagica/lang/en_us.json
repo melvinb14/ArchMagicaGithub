@@ -149,9 +149,11 @@
 	"item.archmagica.steel_leggings": "Steel Leggings",
 	"item.archmagica.steel_boots": "Steel Boots",
 	
-	"block.archmagica.display_case": "Display Case",
-	"block.archmagica.witch_oven": "Witch Oven"
-	
+	"block.archmagica.blacksmith_anvil": "Blacksmith's Anvil",
+	"block.archmagica.magic_crystal": "Blue Magic Crystal",
+	"block.archmagica.magic_crystal2": "Dark Blue Magic Crystal",
+	"block.archmagica.witch_oven": "Witch Oven",
+	"container.archmagica.witch_oven": ""
 	
 	
 	

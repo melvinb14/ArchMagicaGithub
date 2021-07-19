@@ -1,10 +1,5 @@
 package com.melvinbur.archmagica.client.gui;
 
-import com.melvinbur.archmagica.ArchMagica;
-import com.melvinbur.archmagica.common.container.WitchOvenContainer;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.minecraft.client.gui.recipebook.IRecipeShownListener;
 import net.minecraft.client.gui.recipebook.RecipeBookGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -14,8 +9,15 @@ import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+import com.melvinbur.archmagica.ArchMagica;
+import com.melvinbur.archmagica.common.container.WitchOvenContainer;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+
+
 
 @OnlyIn(Dist.CLIENT)
 public class WitchOvenScreen extends ContainerScreen<WitchOvenContainer> implements IRecipeShownListener

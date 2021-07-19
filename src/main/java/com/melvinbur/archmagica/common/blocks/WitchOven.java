@@ -1,10 +1,12 @@
 package com.melvinbur.archmagica.common.blocks;
 
+
+
 import java.util.Random;
 
 import java.util.stream.Stream;
 
-import javax.annotation.Nullable;
+
 
 import com.melvinbur.archmagica.common.te.WitchOvenTileEntity;
 import com.melvinbur.archmagica.core.init.TileEntityTypesInit;
@@ -12,9 +14,6 @@ import com.melvinbur.archmagica.core.init.TileEntityTypesInit;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
@@ -23,8 +22,7 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-
+import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -43,7 +41,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolType;
+
 import net.minecraftforge.api.distmarker.Dist;
 
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -54,6 +52,7 @@ public class WitchOven extends Block {
 
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
 
 	private static final VoxelShape SHAPE_N = Stream.of(
 			Block.makeCuboidShape(0.8000000000000007, 2, 0.5, 14.8, 2.45, 14.5),
@@ -88,122 +87,111 @@ public class WitchOven extends Block {
 			).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
 	private static final VoxelShape SHAPE_E = Stream.of(
-			Block.makeCuboidShape(1.5125000000000006, 2, 0.837500000000001, 15.512499999999998, 2.45, 14.837500000000002),
-			Block.makeCuboidShape(14.612499999999997, 3.2, 13.137500000000001, 15.137499999999998, 11.2, 13.537500000000001),
-			Block.makeCuboidShape(14.587499999999999, 3.25, 2.1374999999999997, 15.137499999999998, 11.2, 2.5375),
-			Block.makeCuboidShape(14.712499999999999, 3.825, 11.4875, 15.137499999999998, 10.45, 11.887500000000001),
-			Block.makeCuboidShape(14.712499999999999, 10.4375, 2.2999999999999994, 15.137499999999998, 11.2125, 13.275000000000002),
-			Block.makeCuboidShape(14.962499999999999, 3.2125, 2.2999999999999994, 15.137499999999998, 3.9875, 13.275000000000002),
-			Block.makeCuboidShape(14.712499999999999, 3.875, 9.637500000000001, 15.137499999999998, 10.45, 10.337500000000002),
-			Block.makeCuboidShape(14.712499999999999, 3.775, 8.287500000000001, 15.137499999999998, 10.75, 8.687500000000002),
-			Block.makeCuboidShape(14.712499999999999, 3.925, 6.637500000000001, 15.137499999999998, 10.725, 7.3625000000000025),
-			Block.makeCuboidShape(14.712499999999999, 3.925, 4.987500000000001, 15.137499999999998, 10.6, 5.387500000000001),
-			Block.makeCuboidShape(14.712499999999999, 3.85, 3.6374999999999997, 15.137499999999998, 10.525, 4.037500000000001),
-			Block.makeCuboidShape(13.037499999999998, 0.025, 1.9375000000000004, 14.0125, 2.025, 3.0375),
-			Block.makeCuboidShape(13.037499999999998, 0.025, 13.037500000000001, 14.0125, 2.025, 14.137500000000001),
-			Block.makeCuboidShape(2.012500000000001, 0.025, 13.037500000000001, 2.9875000000000025, 2.025, 14.137500000000001),
-			Block.makeCuboidShape(2.012500000000001, 0.025, 1.9375000000000004, 2.9875000000000025, 2.025, 3.0375),
-			Block.makeCuboidShape(6.537499999999998, 13.325, 8.837500000000002, 6.837499999999997, 23.275, 9.137500000000001),
-			Block.makeCuboidShape(6.537499999999998, 13.325, 6.562500000000002, 6.837499999999997, 23.225, 6.862500000000001),
-			Block.makeCuboidShape(6.312499999999998, 23.175, 6.287500000000001, 9.787499999999998, 23.35, 9.462500000000002),
-			Block.makeCuboidShape(6.812499999999998, 23.375, 6.787500000000001, 9.187499999999996, 23.55, 8.962500000000002),
-			Block.makeCuboidShape(9.237499999999997, 13.325, 6.562500000000002, 9.537499999999998, 23.225, 6.862500000000001),
-			Block.makeCuboidShape(9.312499999999996, 13.325, 6.862500000000001, 9.437499999999996, 22.55, 8.8625),
-			Block.makeCuboidShape(6.612499999999997, 13.325, 6.862500000000001, 6.737499999999997, 22.575, 8.8625),
-			Block.makeCuboidShape(6.837499999999997, 13.325, 6.687500000000002, 9.237499999999997, 22.5, 6.812500000000002),
-			Block.makeCuboidShape(6.837499999999997, 13.325, 8.9875, 9.237499999999997, 22.475, 9.1125),
-			Block.makeCuboidShape(9.237499999999997, 13.325, 8.8625, 9.537499999999998, 23.3, 9.162500000000001),
-			Block.makeCuboidShape(1.5125000000000006, 12.5, 0.837500000000001, 15.512499999999998, 12.95, 14.837500000000002),
-			Block.makeCuboidShape(2.6125000000000007, 13, 1.9375000000000004, 14.412499999999998, 13.35, 13.837500000000002),
-			Block.makeCuboidShape(2.1875000000000018, 2.5, 1.6374999999999997, 14.512499999999998, 12.5, 14.037500000000001),
-			Block.makeCuboidShape(14.812499999999996, 3.575, 2.1625, 14.937499999999996, 10.975, 13.287500000000001)
+			Block.makeCuboidShape(1.4875000000000025, 2, 1.2625000000000002, 15.4875, 2.45, 15.262499999999998),
+			Block.makeCuboidShape(14.587499999999999, 3.2, 2.562500000000001, 15.1125, 11.2, 2.9624999999999995),
+			Block.makeCuboidShape(14.5625, 3.25, 13.562499999999998, 15.1125, 11.2, 13.962499999999997),
+			Block.makeCuboidShape(14.6875, 3.825, 4.212499999999999, 15.1125, 10.45, 4.612499999999997),
+			Block.makeCuboidShape(14.6875, 10.4375, 2.825, 15.1125, 11.2125, 13.799999999999997),
+			Block.makeCuboidShape(14.9375, 3.2125, 2.825, 15.1125, 3.9875, 13.799999999999997),
+			Block.makeCuboidShape(14.6875, 3.875, 5.7624999999999975, 15.1125, 10.45, 6.462499999999997),
+			Block.makeCuboidShape(14.6875, 3.775, 7.412499999999998, 15.1125, 10.75, 7.812499999999998),
+			Block.makeCuboidShape(14.6875, 3.925, 8.737499999999997, 15.1125, 10.725, 9.462499999999997),
+			Block.makeCuboidShape(14.6875, 3.925, 10.712499999999997, 15.1125, 10.6, 11.112499999999997),
+			Block.makeCuboidShape(14.6875, 3.85, 12.062499999999998, 15.1125, 10.525, 12.462499999999997),
+			Block.makeCuboidShape(13.0125, 0.025, 13.062499999999998, 13.987499999999999, 2.025, 14.162499999999998),
+			Block.makeCuboidShape(13.0125, 0.025, 1.9624999999999995, 13.987499999999999, 2.025, 3.062500000000001),
+			Block.makeCuboidShape(1.9875000000000025, 0.025, 1.9624999999999995, 2.962500000000002, 2.025, 3.062500000000001),
+			Block.makeCuboidShape(1.9875000000000025, 0.025, 13.062499999999998, 2.962500000000002, 2.025, 14.162499999999998),
+			Block.makeCuboidShape(6.512500000000003, 13.325, 6.962499999999997, 6.812500000000002, 23.275, 7.2624999999999975),
+			Block.makeCuboidShape(6.512500000000003, 13.325, 9.237499999999997, 6.812500000000002, 23.225, 9.537499999999998),
+			Block.makeCuboidShape(6.287500000000003, 23.175, 6.6374999999999975, 9.762500000000003, 23.35, 9.812499999999998),
+			Block.makeCuboidShape(6.787500000000003, 23.375, 7.1374999999999975, 9.162500000000001, 23.55, 9.312499999999998),
+			Block.makeCuboidShape(9.212500000000002, 13.325, 9.237499999999997, 9.512500000000003, 23.225, 9.537499999999998),
+			Block.makeCuboidShape(9.287500000000001, 13.325, 7.237499999999997, 9.412500000000001, 22.55, 9.237499999999997),
+			Block.makeCuboidShape(6.587500000000002, 13.325, 7.237499999999997, 6.712500000000002, 22.575, 9.237499999999997),
+			Block.makeCuboidShape(6.812500000000002, 13.325, 9.287499999999998, 9.212500000000002, 22.5, 9.412499999999998),
+			Block.makeCuboidShape(6.812500000000002, 13.325, 6.987499999999997, 9.212500000000002, 22.475, 7.112499999999997),
+			Block.makeCuboidShape(9.212500000000002, 13.325, 6.937499999999998, 9.512500000000003, 23.3, 7.237499999999997),
+			Block.makeCuboidShape(1.4875000000000025, 12.5, 1.2625000000000002, 15.4875, 12.95, 15.262499999999998),
+			Block.makeCuboidShape(2.587500000000002, 13, 2.2625, 14.3875, 13.35, 14.162499999999998),
+			Block.makeCuboidShape(2.162500000000003, 2.5, 2.062500000000001, 14.487499999999999, 12.5, 14.462499999999997),
+			Block.makeCuboidShape(14.787499999999998, 3.575, 2.812500000000001, 14.912499999999998, 10.975, 13.937499999999998)
 			).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
 	private static final VoxelShape SHAPE_W = Stream.of(
-			Block.makeCuboidShape(0.46250000000000113, 2, 1.237499999999999, 14.462499999999997, 2.45, 15.237499999999995),
-			Block.makeCuboidShape(0.8375000000000011, 3.2, 2.5375000000000005, 1.3625000000000016, 11.2, 2.937500000000001),
-			Block.makeCuboidShape(0.8375000000000011, 3.25, 13.537499999999996, 1.3875000000000002, 11.2, 13.937499999999996),
-			Block.makeCuboidShape(0.8375000000000011, 3.825, 4.187499999999998, 1.2625000000000002, 10.45, 4.587499999999998),
-			Block.makeCuboidShape(0.8375000000000011, 10.4375, 2.8, 1.2625000000000002, 11.2125, 13.774999999999997),
-			Block.makeCuboidShape(0.8375000000000011, 3.2125, 2.8, 1.0124999999999997, 3.9875, 13.774999999999997),
-			Block.makeCuboidShape(0.8375000000000011, 3.875, 5.7374999999999945, 1.2625000000000002, 10.45, 6.437499999999996),
-			Block.makeCuboidShape(0.8375000000000011, 3.775, 7.387499999999995, 1.2625000000000002, 10.75, 7.787499999999994),
-			Block.makeCuboidShape(0.8375000000000011, 3.925, 8.712499999999993, 1.2625000000000002, 10.725, 9.437499999999995),
-			Block.makeCuboidShape(0.8375000000000011, 3.925, 10.687499999999995, 1.2625000000000002, 10.6, 11.087499999999995),
-			Block.makeCuboidShape(0.8375000000000011, 3.85, 12.037499999999994, 1.2625000000000002, 10.525, 12.437499999999996),
-			Block.makeCuboidShape(1.9625, 0.025, 13.037499999999996, 2.9375000000000013, 2.025, 14.137499999999996),
-			Block.makeCuboidShape(1.9625, 0.025, 1.9375000000000009, 2.9375000000000013, 2.025, 3.0375000000000005),
-			Block.makeCuboidShape(12.987499999999995, 0.025, 1.9375000000000009, 13.962499999999997, 2.025, 3.0375000000000005),
-			Block.makeCuboidShape(12.987499999999995, 0.025, 13.037499999999996, 13.962499999999997, 2.025, 14.137499999999996),
-			Block.makeCuboidShape(9.1375, 13.325, 6.937499999999996, 9.437499999999998, 23.275, 7.2374999999999945),
-			Block.makeCuboidShape(9.1375, 13.325, 9.212499999999995, 9.437499999999998, 23.225, 9.512499999999994),
-			Block.makeCuboidShape(6.187499999999998, 23.175, 6.6124999999999945, 9.662499999999998, 23.35, 9.787499999999994),
-			Block.makeCuboidShape(6.7875, 23.375, 7.1124999999999945, 9.162499999999998, 23.55, 9.287499999999994),
-			Block.makeCuboidShape(6.437499999999998, 13.325, 9.212499999999995, 6.737499999999999, 23.225, 9.512499999999994),
-			Block.makeCuboidShape(6.5375, 13.325, 7.212499999999996, 6.6625, 22.55, 9.212499999999995),
-			Block.makeCuboidShape(9.237499999999999, 13.325, 7.212499999999996, 9.362499999999999, 22.575, 9.212499999999995),
-			Block.makeCuboidShape(6.737499999999999, 13.325, 9.262499999999994, 9.1375, 22.5, 9.387499999999994),
-			Block.makeCuboidShape(6.737499999999999, 13.325, 6.962499999999996, 9.1375, 22.475, 7.087499999999996),
-			Block.makeCuboidShape(6.437499999999998, 13.325, 6.912499999999995, 6.737499999999999, 23.3, 7.212499999999996),
-			Block.makeCuboidShape(0.46250000000000113, 12.5, 1.237499999999999, 14.462499999999997, 12.95, 15.237499999999995),
-			Block.makeCuboidShape(1.5625000000000009, 13, 2.2375, 13.362499999999997, 13.35, 14.137499999999996),
-			Block.makeCuboidShape(1.4625000000000012, 2.5, 2.0375000000000005, 13.787499999999996, 12.5, 14.437499999999996),
-			Block.makeCuboidShape(1.0375000000000019, 3.575, 2.7875000000000005, 1.1625000000000023, 10.975, 13.912499999999996)
+			Block.makeCuboidShape(0.5125000000000004, 2, 1.2625000000000002, 14.512499999999998, 2.45, 15.262499999999998),
+			Block.makeCuboidShape(0.8875000000000004, 3.2, 2.562500000000001, 1.412500000000001, 11.2, 2.9624999999999995),
+			Block.makeCuboidShape(0.8875000000000004, 3.25, 13.562499999999998, 1.4374999999999996, 11.2, 13.962499999999997),
+			Block.makeCuboidShape(0.8875000000000004, 3.825, 4.212499999999999, 1.3124999999999996, 10.45, 4.612499999999997),
+			Block.makeCuboidShape(0.8875000000000004, 10.4375, 2.825, 1.3124999999999996, 11.2125, 13.799999999999997),
+			Block.makeCuboidShape(0.8875000000000004, 3.2125, 2.825, 1.0624999999999993, 3.9875, 13.799999999999997),
+			Block.makeCuboidShape(0.8875000000000004, 3.875, 5.7624999999999975, 1.3124999999999996, 10.45, 6.462499999999997),
+			Block.makeCuboidShape(0.8875000000000004, 3.775, 7.412499999999998, 1.3124999999999996, 10.75, 7.812499999999998),
+			Block.makeCuboidShape(0.8875000000000004, 3.925, 8.737499999999997, 1.3124999999999996, 10.725, 9.462499999999997),
+			Block.makeCuboidShape(0.8875000000000004, 3.925, 10.712499999999997, 1.3124999999999996, 10.6, 11.112499999999997),
+			Block.makeCuboidShape(0.8875000000000004, 3.85, 12.062499999999998, 1.3124999999999996, 10.525, 12.462499999999997),
+			Block.makeCuboidShape(2.012500000000001, 0.025, 13.062499999999998, 2.9875000000000007, 2.025, 14.162499999999998),
+			Block.makeCuboidShape(2.012500000000001, 0.025, 1.9624999999999995, 2.9875000000000007, 2.025, 3.062500000000001),
+			Block.makeCuboidShape(13.037499999999998, 0.025, 1.9624999999999995, 14.012499999999998, 2.025, 3.062500000000001),
+			Block.makeCuboidShape(13.037499999999998, 0.025, 13.062499999999998, 14.012499999999998, 2.025, 14.162499999999998),
+			Block.makeCuboidShape(9.187499999999998, 13.325, 6.962499999999997, 9.487499999999997, 23.275, 7.2624999999999975),
+			Block.makeCuboidShape(9.187499999999998, 13.325, 9.237499999999997, 9.487499999999997, 23.225, 9.537499999999998),
+			Block.makeCuboidShape(6.237499999999997, 23.175, 6.6374999999999975, 9.712499999999997, 23.35, 9.812499999999998),
+			Block.makeCuboidShape(6.837499999999999, 23.375, 7.1374999999999975, 9.212499999999997, 23.55, 9.312499999999998),
+			Block.makeCuboidShape(6.487499999999997, 13.325, 9.237499999999997, 6.787499999999998, 23.225, 9.537499999999998),
+			Block.makeCuboidShape(6.587499999999999, 13.325, 7.237499999999997, 6.712499999999999, 22.55, 9.237499999999997),
+			Block.makeCuboidShape(9.287499999999998, 13.325, 7.237499999999997, 9.412499999999998, 22.575, 9.237499999999997),
+			Block.makeCuboidShape(6.787499999999998, 13.325, 9.287499999999998, 9.187499999999998, 22.5, 9.412499999999998),
+			Block.makeCuboidShape(6.787499999999998, 13.325, 6.987499999999997, 9.187499999999998, 22.475, 7.112499999999997),
+			Block.makeCuboidShape(6.487499999999997, 13.325, 6.937499999999998, 6.787499999999998, 23.3, 7.237499999999997),
+			Block.makeCuboidShape(0.5125000000000004, 12.5, 1.2625000000000002, 14.512499999999998, 12.95, 15.262499999999998),
+			Block.makeCuboidShape(1.6125000000000003, 13, 2.2625, 13.412499999999998, 13.35, 14.162499999999998),
+			Block.makeCuboidShape(1.5125000000000006, 2.5, 2.062500000000001, 13.837499999999997, 12.5, 14.462499999999997),
+			Block.makeCuboidShape(1.0875000000000015, 3.575, 2.812500000000001, 1.2125000000000017, 10.975, 13.937499999999998)
 			).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
 	private static final VoxelShape SHAPE_S = Stream.of(
-			Block.makeCuboidShape(1.1999999999999986, 2, 1.450000000000001, 15.199999999999996, 2.45, 15.45),
-			Block.makeCuboidShape(2.5, 3.2, 14.549999999999999, 2.9000000000000004, 11.2, 15.075),
-			Block.makeCuboidShape(13.499999999999996, 3.25, 14.525, 13.899999999999997, 11.2, 15.075),
-			Block.makeCuboidShape(4.149999999999999, 3.825, 14.65, 4.549999999999998, 10.45, 15.075),
-			Block.makeCuboidShape(2.7624999999999993, 10.4375, 14.65, 13.737499999999997, 11.2125, 15.075),
-			Block.makeCuboidShape(2.7624999999999993, 3.2125, 14.9, 13.737499999999997, 3.9875, 15.075),
-			Block.makeCuboidShape(5.699999999999995, 3.875, 14.65, 6.399999999999996, 10.45, 15.075),
-			Block.makeCuboidShape(7.349999999999995, 3.775, 14.65, 7.749999999999996, 10.75, 15.075),
-			Block.makeCuboidShape(8.674999999999994, 3.925, 14.65, 9.399999999999995, 10.725, 15.075),
-			Block.makeCuboidShape(10.649999999999995, 3.925, 14.65, 11.049999999999995, 10.6, 15.075),
-			Block.makeCuboidShape(11.999999999999995, 3.85, 14.65, 12.399999999999997, 10.525, 15.075),
-			Block.makeCuboidShape(12.999999999999996, 0.025, 12.975, 14.099999999999996, 2.025, 13.950000000000001),
-			Block.makeCuboidShape(1.9000000000000001, 0.025, 12.975, 3, 2.025, 13.950000000000001),
-			Block.makeCuboidShape(1.9000000000000001, 0.025, 1.950000000000001, 3, 2.025, 2.9250000000000025),
-			Block.makeCuboidShape(12.999999999999996, 0.025, 1.950000000000001, 14.099999999999996, 2.025, 2.9250000000000025),
-			Block.makeCuboidShape(6.899999999999996, 13.325, 6.475, 7.199999999999995, 23.275, 6.774999999999999),
-			Block.makeCuboidShape(9.174999999999995, 13.325, 6.475, 9.474999999999994, 23.225, 6.774999999999999),
-			Block.makeCuboidShape(6.574999999999995, 23.175, 6.25, 9.749999999999995, 23.35, 9.725),
-			Block.makeCuboidShape(7.074999999999995, 23.375, 6.75, 9.249999999999995, 23.55, 9.124999999999998),
-			Block.makeCuboidShape(9.174999999999995, 13.325, 9.174999999999999, 9.474999999999994, 23.225, 9.475),
-			Block.makeCuboidShape(7.174999999999996, 13.325, 9.249999999999998, 9.174999999999995, 22.55, 9.374999999999998),
-			Block.makeCuboidShape(7.174999999999996, 13.325, 6.549999999999999, 9.174999999999995, 22.575, 6.674999999999999),
-			Block.makeCuboidShape(9.224999999999994, 13.325, 6.774999999999999, 9.349999999999994, 22.5, 9.174999999999999),
-			Block.makeCuboidShape(6.924999999999996, 13.325, 6.774999999999999, 7.049999999999996, 22.475, 9.174999999999999),
-			Block.makeCuboidShape(6.874999999999996, 13.325, 9.174999999999999, 7.174999999999996, 23.3, 9.475),
-			Block.makeCuboidShape(1.1999999999999986, 12.5, 1.450000000000001, 15.199999999999996, 12.95, 15.45),
-			Block.makeCuboidShape(2.1999999999999993, 13, 2.5500000000000007, 14.099999999999996, 13.35, 14.35),
-			Block.makeCuboidShape(1.9999999999999998, 2.5, 2.1250000000000018, 14.399999999999997, 12.5, 14.45),
-			Block.makeCuboidShape(2.75, 3.575, 14.749999999999998, 13.874999999999996, 10.975, 14.874999999999998)
+			Block.makeCuboidShape(0.75, 2, 1.5, 14.75, 2.45, 15.5),
+			Block.makeCuboidShape(13.05, 3.2, 14.6, 13.45, 11.2, 15.125),
+			Block.makeCuboidShape(2.05, 3.25, 14.575, 2.45, 11.2, 15.125),
+			Block.makeCuboidShape(11.4, 3.825, 14.7, 11.8, 10.45, 15.125),
+			Block.makeCuboidShape(2.2125, 10.4375, 14.7, 13.1875, 11.2125, 15.125),
+			Block.makeCuboidShape(2.2125, 3.2125, 14.95, 13.1875, 3.9875, 15.125),
+			Block.makeCuboidShape(9.55, 3.875, 14.7, 10.25, 10.45, 15.125),
+			Block.makeCuboidShape(8.2, 3.775, 14.7, 8.6, 10.75, 15.125),
+			Block.makeCuboidShape(6.55, 3.925, 14.7, 7.275, 10.725, 15.125),
+			Block.makeCuboidShape(4.9, 3.925, 14.7, 5.3, 10.6, 15.125),
+			Block.makeCuboidShape(3.55, 3.85, 14.7, 3.95, 10.525, 15.125),
+			Block.makeCuboidShape(1.85, 0.025, 13.025, 2.95, 2.025, 14),
+			Block.makeCuboidShape(12.95, 0.025, 13.025, 14.05, 2.025, 14),
+			Block.makeCuboidShape(12.95, 0.025, 2, 14.05, 2.025, 2.9749999999999996),
+			Block.makeCuboidShape(1.85, 0.025, 2, 2.95, 2.025, 2.9749999999999996),
+			Block.makeCuboidShape(8.75, 13.325, 6.525, 9.05, 23.275, 6.824999999999999),
+			Block.makeCuboidShape(6.475, 13.325, 6.525, 6.775, 23.225, 6.824999999999999),
+			Block.makeCuboidShape(6.2, 23.175, 6.300000000000001, 9.375, 23.35, 9.775),
+			Block.makeCuboidShape(6.7, 23.375, 6.800000000000001, 8.875, 23.55, 9.175),
+			Block.makeCuboidShape(6.475, 13.325, 9.225, 6.775, 23.225, 9.525),
+			Block.makeCuboidShape(6.775, 13.325, 9.3, 8.775, 22.55, 9.425),
+			Block.makeCuboidShape(6.775, 13.325, 6.6, 8.775, 22.575, 6.725),
+			Block.makeCuboidShape(6.6, 13.325, 6.824999999999999, 6.725, 22.5, 9.225),
+			Block.makeCuboidShape(8.9, 13.325, 6.824999999999999, 9.025, 22.475, 9.225),
+			Block.makeCuboidShape(8.775, 13.325, 9.225, 9.075, 23.3, 9.525),
+			Block.makeCuboidShape(0.75, 12.5, 1.5, 14.75, 12.95, 15.5),
+			Block.makeCuboidShape(1.85, 13, 2.5999999999999996, 13.75, 13.35, 14.4),
+			Block.makeCuboidShape(1.55, 2.5, 2.1750000000000007, 13.95, 12.5, 14.5),
+			Block.makeCuboidShape(2.075, 3.575, 14.8, 13.2, 10.975, 14.925)
 			).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
-	public WitchOven() {
-        super(
-        Block.Properties.create(Material.ANVIL, MaterialColor.GRAY).
-        hardnessAndResistance(5F, 6F).
-        setRequiresTool().
-        harvestTool(ToolType.PICKAXE).
-        sound(SoundType.ANVIL));
-        
-        
-    }
 	
-	
-	
-	
-	public WitchOven(Properties properties) 
-	{
+
+	public WitchOven(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
+		
+		
 	}
-	@Nullable 
-    @Override
+	
+	@Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
@@ -228,6 +216,7 @@ public class WitchOven extends Block {
 			double offY = rand.nextDouble() * 9.0D / 16.0D;
 			double offZ = axis == Direction.Axis.Z ? direction.getZOffset() * 0.52D : defOffset;
 			worldIn.addParticle(ParticleTypes.SMOKE, x + offX, y + offY, z + offZ, 0.0D, 0.0D, 0.0D);
+			
 		}
 	}
 	@Override
@@ -272,24 +261,22 @@ public class WitchOven extends Block {
 	       }
 	}
 	
-	
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        switch (state.get(FACING)) {
-            case NORTH:
-                return SHAPE_N;
-            case SOUTH:
-                return SHAPE_S;
-            case EAST:
-                return SHAPE_E;
-            case WEST:
-                return SHAPE_W;
-            default:
-                return SHAPE_N;
-        }
-    }
+
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		switch (state.get(FACING)) {
+		case EAST:
+			return SHAPE_E;
+		case SOUTH:
+			return SHAPE_S;
+		case WEST:
+			return SHAPE_W;
+		default:
+			return SHAPE_N;
+		}
+	}
     
-    @Override
+	@Override
 	public boolean hasTileEntity(BlockState state) 
 	{
 		return true;
@@ -312,26 +299,24 @@ public class WitchOven extends Block {
 	{
 		return Container.calcRedstone(worldIn.getTileEntity(pos));
 	}
+	
+@Override
+public BlockState rotate(BlockState state, Rotation rot) {
+    return state.with(FACING, rot.rotate(state.get(FACING)));
+}
 
-    @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
-    }
+@SuppressWarnings("deprecation")
+@Override
+public BlockState mirror(BlockState state, Mirror mirrorIn) 
+{
+	return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+}
 
-    @SuppressWarnings("deprecation")
-	@Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-    }
 
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
+@Override
+protected void fillStateContainer(Builder<Block, BlockState> builder) 
+{
+	builder.add(FACING, LIT);
+}
 
-    /**Change the block shadow -- Lower return values = more shadow*/
-    @Override
-    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return 0.6F;
-    }
 }

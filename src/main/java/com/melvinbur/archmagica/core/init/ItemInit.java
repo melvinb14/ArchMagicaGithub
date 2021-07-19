@@ -1,3 +1,4 @@
+
 package com.melvinbur.archmagica.core.init;
 
 import com.melvinbur.archmagica.ArchMagica;
@@ -336,16 +337,26 @@ public class ItemInit {
 			() -> new BlockItem(BlockInit.JADE_ORE.get(), new Item.Properties().group(ArchMagicaItemGroup2.ARCHMAGICA)));
 	
 	
+	
+	// BlockBench 
+	
 	public static final RegistryObject<BlockItem> WITCH_OVEN = ITEMS.register("witch_oven", 
 			() -> new BlockItem(BlockInit.WITCH_OVEN.get(), new Item.Properties().group(ArchMagicaItemGroup2.ARCHMAGICA)));
 	
+	public static final RegistryObject<BlockItem> BLACKSMITH_ANVIL = ITEMS.register("blacksmith_anvil", 
+			() -> new BlockItem(BlockInit.BLACKSMITH_ANVIL.get(), new Item.Properties().group(ArchMagicaItemGroup2.ARCHMAGICA)));
+	
+	public static final RegistryObject<BlockItem> MAGIC_CRYSTAL = ITEMS.register("magic_crystal", 
+			() -> new BlockItem(BlockInit.MAGIC_CRYSTAL.get(), new Item.Properties().group(ArchMagicaItemGroup2.ARCHMAGICA)));
+	
+	public static final RegistryObject<BlockItem> MAGIC_CRYSTAL2 = ITEMS.register("magic_crystal2", 
+			() -> new BlockItem(BlockInit.MAGIC_CRYSTAL2.get(), new Item.Properties().group(ArchMagicaItemGroup2.ARCHMAGICA)));
 	
 	
 	
 	
-	
-	
-	
+
+	 
 	
 	
 	

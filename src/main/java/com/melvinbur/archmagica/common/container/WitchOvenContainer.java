@@ -1,18 +1,17 @@
 package com.melvinbur.archmagica.common.container;
 
 
+
 import com.melvinbur.archmagica.common.container.slot.OvenFuelSlot;
 import com.melvinbur.archmagica.common.container.slot.OvenOutputSlot;
 import com.melvinbur.archmagica.common.recipes.AlloyingRecipe;
 import com.melvinbur.archmagica.common.te.WitchOvenTileEntity;
 import com.melvinbur.archmagica.core.init.ContainerTypesInit;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.Inventory;
-
 import net.minecraft.inventory.container.RecipeBookContainer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -22,9 +21,8 @@ import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-
 
 public class WitchOvenContainer extends RecipeBookContainer<IInventory>
 {
@@ -127,7 +125,7 @@ public class WitchOvenContainer extends RecipeBookContainer<IInventory>
 
 	public boolean isFuel(ItemStack itemStack) 
 	{
-		return WitchOvenTileEntity.isFuel(itemStack);
+		return  WitchOvenTileEntity.isFuel(itemStack);
 	}
 	
 	@Override
