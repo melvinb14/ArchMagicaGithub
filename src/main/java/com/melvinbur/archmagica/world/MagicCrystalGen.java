@@ -1,6 +1,9 @@
 package com.melvinbur.archmagica.world;
 
+
+
 import com.google.common.collect.ImmutableList;
+import com.melvinbur.archmagica.common.handler.RegistryHandler;
 import com.melvinbur.archmagica.core.init.BlockInit;
 
 
@@ -12,9 +15,9 @@ import net.minecraft.world.gen.feature.Feature;
 
 public class MagicCrystalGen { 
 @SuppressWarnings("rawtypes")
-public static final ConfiguredFeature MAGIC_CRYSTAL = register("magic_crystal", Feature.SIMPLE_BLOCK.withConfiguration
+public static final ConfiguredFeature MAGIC_CRYSTAL = RegistryHandler.register("magic_crystal",Feature.SIMPLE_BLOCK.withConfiguration
 		(new BlockWithContextConfig(BlockInit.MAGIC_CRYSTAL.get().getDefaultState(), 
-				ImmutableList.of(Blocks.STONE.getDefaultState()), ImmutableList.of(), ImmutableList.of())).range(50).square().count(10));
+				ImmutableList.of(Blocks.STONE.getDefaultState()), ImmutableList.of(), ImmutableList.of())).range(50).square().count(6));
 	
 	
 	
