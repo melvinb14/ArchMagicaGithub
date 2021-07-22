@@ -148,6 +148,11 @@
 	"item.archmagica.steel_chestplate": "Steel Chestplate",
 	"item.archmagica.steel_leggings": "Steel Leggings",
 	"item.archmagica.steel_boots": "Steel Boots",
+	"item.archmagica.iron_hammer": "Iron Blacksmith Hammer",
+	"item.archmagica.diamond_hammer": "Diamond Blacksmith Hammer",
+	"item.archmagica.iron_hatchet": "Iron Hatchet",
+	"item.archmagica.diamond_hatchet": "Diamond Hatchet",
+	
 	
 	"block.archmagica.blacksmith_anvil": "Blacksmith's Anvil",
 	"block.archmagica.magic_crystal": "Blue Magic Crystal",
