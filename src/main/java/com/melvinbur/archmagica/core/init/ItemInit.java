@@ -539,6 +539,22 @@ public class ItemInit {
 					new Item.Properties().group(ArchMagicaItemGroup3.ARCHMAGICA)));
 	
 	
+	// Tools
+	
+	
+	public static final RegistryObject<Item> IRON_HATCHET = ITEMS.register("iron_hatchet", 
+			() -> new Item(new Item.Properties().group(ArchMagicaItemGroup3.ARCHMAGICA)));
+	
+	public static final RegistryObject<Item> DIAMOND_HATCHET = ITEMS.register("diamond_hatchet", 
+			() -> new Item(new Item.Properties().group(ArchMagicaItemGroup3.ARCHMAGICA)));
+	
+	public static final RegistryObject<Item> IRON_HAMMER = ITEMS.register("iron_hammer", 
+			() -> new Item(new Item.Properties().group(ArchMagicaItemGroup3.ARCHMAGICA)));
+	
+	public static final RegistryObject<Item> DIAMOND_HAMMER = ITEMS.register("diamond_hammer", 
+			() -> new Item(new Item.Properties().group(ArchMagicaItemGroup3.ARCHMAGICA)));
+	
+	
 	
 	
 	
